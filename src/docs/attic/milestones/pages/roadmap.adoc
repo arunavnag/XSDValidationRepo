@@ -1,0 +1,329 @@
+[[Milestones]]
+= Milestones & Roadmap
+
+== Deciding what path to take
+
+There are different priorities in each integration project. Is your application UI or back-end-heavy? How important is a good user journey? What data is needed or provided?
+The reality is, that integration can become a pretty complex topic. This overview of all the possible topics shall help you with deciding what work is needed in which order for your specific application / use-case.
+
+//TODO ##Skill tree? to show separate and followups##
+
+*Milestones*
+
+. *Become a registered application*
+. *Become a module (integrated application)*
+. *Become a deployable module*
+. *Become part of the Nexeed Portfolio*
+
+TIP: Before you start, please check out our xref:concepts:general.adoc[]
+
+
+'''
+[[Workpackages]]
+//TODO: link respective chapter in How-To
+== Milestone 1: Registered Application
+
+*Overview of the work packages*
+[width=100%]
+[cols="1,~s,~,~,~,1e"]
+|===
+|#|Title |Description |You need this if... |Link|Effort estimation
+
+|1
+|Register in Multitenant Access Control
+|Each application must register itself or be registered in Multitenant Access Control in order do be allowed to interact with the system.
+|If you want to access any kind of API in Nexeed.
+|xref:MACMA:03_getting_started:10_appregistration.adoc[How-To]
+|4h
+
+|2
+|Implement OAuth Client Credential flow
+|The main authorization mechanism between Nexeed IAS applications is via (Bearer) tokens. These tokens must be acquired from Multitenant Access Control with the mentioned flow.
+|If you want to access any kind of API in Nexeed.
+|xref:MACMA:03_getting_started:30_authentication.adoc[How-To]
+|
+
+|3
+|Register roles
+|To better control what users are allowed to do, role based access in Multitenant Access Control should be used. Therefore, these roles must be propagated to Multitenant Access Control.
+|If your application should not be accessible by everyone.
+|xref:MACMA:03_getting_started:40_authorization.adoc[How-To]
+|
+
+|4
+|Register in Web Portal
+|The main means of user interaction is a web page and the main means to navigate to YOUR web page(s) is our Web Portal module. Therefore, they have to be registered to be linked and embedded.
+|If your application has a web-based user interface.
+|xref:Portal:04_how_tos:10_register_views.adoc[How-To]
+|
+
+|5
+|Implement Authorization Code Flow with PKCE
+|Frontends must pass the token the users retrieve when logging in to the back-end to check its validity and identity.
+|If your application wants to identify its web-based users.
+|xref:MACMA:03_getting_started:40_authorization.adoc[How-To]
+|
+
+|6
+|Resource Based Access Control
+|There are cases where role based access is not fine-grained enough to cover all security or privacy needs of an application. Applications can therefore register resources in Multitenant Access Control to tune access rights with CRUD methodology.
+|If your application needs fine-grained access.
+|xref:MACMA:03_getting_started:40_authorization.adoc[How-To]
+|
+
+|7
+|Implement Authorization Checking
+|To allow only authorized users to access functionality, their tokens must be checked for validity. Also, certain functions might only be made available for users with certain roles, which must be implemented.
+|If you provide functionality that requires some kind of authorization.
+|xref:MACMA:03_getting_started:40_authorization.adoc[How-To]
+|
+
+
+|===
+
+'''
+== Milestone 2: IAS Module (integrated application)
+
+*Overview of the work packages*
+//TODO: link respective chapter in How-To
+[caption=]
+[width=100%]
+[cols="1,~s,~,~,1e"]
+|===
+|#|Title |Description |You need this if... |Effort estimation
+
+|8
+|Implement Multi-tenancy
+|Nexeed IAS is a multi-tenant capable software and so are its modules. If you want your module to participate in the advantages this brings, you need to implement according concepts.
+|If you want to serve multiple tenants or deal with data in a multi-tenant environment.
+|
+
+|9
+|Master Data Integration
+|Our Nexeed Module xref:master_data_management:introduction:introduction.adoc[Master Data Management] offers a centralized master data storage and management and acts as the "single source of truth" for this kind of data.
+|If your application handles any kind of information linked to a master data context, like "Line, Station, Device".
+|
+
+|10
+|Consume shop-floor data via Information Router
+|Internally, Nexeed IAS relies on a Publish/Subscribe architecture to decouple modules and scale data flow. To use this data, modules must subscribe to a certain exchange.
+|If your application relies on data from the shop-floor, this data should be sent through our Information Router and consumed by your module asynchronously afterwards.
+|
+
+|11
+|Consume/Publish integration events
+|Application Integration in Nexeed IAS relies on two pillars: first request information on demand and then get updated on changes. This keeps the strain on services and network to a minimum. To benefit from this approach, your application must implement it.
+|If your application should react to changes in other modules and/or other modules should react to your changes.
+|
+
+|12
+|Implement Multi-language Support
+|If users change the language in Web Portal, all modules viewed through the Web Portal should respect this change.
+|If your application's user interface is to be offered in multiple languages.
+|
+
+|13
+|Implement User preferences
+|Web Portal provides users the means to easily and centrally change personal settings. All modules must respect these settings.
+|If the representation of information your module's UI shows can be configured in the user settings (e.g. Dates, Time,... ).
+|
+
+|14
+|Provide Resource API documentation
+|Any module in Nexeed IAS that provides public REST APIs has to document them in OpenAPI v3+.
+|If your application has any public REST API.
+|
+
+|15
+|Provide Event API documentation
+|Asynchronous communication between modules is done via the Integration Events. Every module providing such data needs to document it in a way compatible with the Web Portal.
+|If your application provides integration events.
+|
+
+|16
+|Provide Widgets
+|The Web Portal offers modules (and users) a dashboard functionality. To present data to the users on these dashboard, modules need to register widgets to the Web Portal.
+|If your application wants to present small, configurable data widgets.
+|
+
+|17
+|Provide Context-Contributions
+|A useful way of navigating a large clustered system like the Nexeed IAS is using our context links. To contribute to contexts, modules must register their according views to the Web Portal.
+|If your application offers views in a certain context, like facilities, devices or events.
+|
+
+|18
+|Check Open Source Compliance
+|Legal compliance is one of the key pillars of the Bosch software development codex. Therefore, all modules need to be checked regularly for licences.
+|If your application uses any libraries or code under license.
+|
+
+|19
+|Do Security-Scans
+|With modern-day threads to IT-Security, it is crucial for Nexeed IAS that modules fulfill common state-of-the-art security standards and are constantly checked against vulnerabilities.
+|If your application gets deployed to vulnerable networks or into production.
+|
+
+|20
+|Provide User Manual
+|No software is 100% self-explanatory and therefore needs a manual for users to gain knowledge from.
+|If your application UI is not 100% self-explanatory.
+|
+
+|21
+|Provide SLA (capabilities and limitations)
+|For the customers it is very valuable to know what they can do and can not do with a module. As a first measure, this needs to be documented for every module in a certain way.
+|If your customers need to know your service offering on technical level
+|
+
+|22
+|Provide release Notes
+|Customers want to know what changes are made to their software when there is an update. So every module needs to take care that they document and publish this information.
+|If you plan to do updates on your application after it was first released
+|
+
+|23
+|Customer Support Process alignment
+|As modules in Nexeed IAS per-se appear to be part of a single offering, handling requests might be different in cases where non-Bosch Connected Industry modules are involved. Therefore, it is crucial to align with our support team.
+|If you provide an application deployed in production
+|
+
+|===
+
+'''
+== Milestone 3: Deployable Module
+
+*Overview of the work packages*
+
+//TODO: link respective chapter in How-To
+[caption=]
+[width=100%]
+[cols="1,~s,~,~,1e"]
+|===
+|#|Title |Description |You need this if... |Effort estimation
+
+// Subdomains
+
+|24
+|Provide Linux-based docker images
+|
+|If you want your artefacts deployed in the same environment as Nexeed IAS.
+|
+
+|25
+|Provide HELM charts
+|
+|If you want to enable the set-up of your application in Kubernetes.
+|
+
+|26
+|Provide a health endpoint
+|
+|If you want your application compatible with orchestration tools in operation.
+|
+
+|27
+|Test on Kubernetes
+|
+|If you want to support Kubernetes based environments.
+|
+
+|28
+|Implement & document configuration options
+|
+|If you want your application to be flexible in different scenarios.
+|
+
+|29
+|Implement logging
+|
+|If you want to enable 2nd and 3rd level support processes.
+|
+
+|30
+|Implement metrics
+|
+|If you want to enable monitoring and operation of your application.
+|
+
+|31
+|Testing from docker containers
+|
+|If you want to facilitate testing in any environment.
+|
+
+|32
+|Performance testing
+|
+|If you want to make sure your application can handle different load scenarios.
+|
+
+|33
+|Provide Operations Manual
+|
+|If you want other people to understand how to run your application.
+|
+
+|34
+|Provide system requirements
+|
+|If you want to make sure anyone running your application has the right prerequisites.
+|
+
+|===
+
+'''
+== Milestone 4: Nexeed Portfolio Module
+
+*Overview of the work packages*
+
+//TODO: link respective chapter in How-To
+[caption=]
+[width=100%]
+[cols="1,~s,~,~,1e"]
+|===
+|#|Title |Description |You need this if... |Effort estimation
+
+|35
+|Usage of Bosch style guide
+|
+|If you want your application to look the same as the other Nexeed IAS modules.
+|
+
+|36
+|Usage of Bosch SDK (internal only)
+|
+|If you don't want to implement all the frontend (and back-end) functionality yourself.
+|
+
+|37
+|Usage of Bosch Usability Guidelines
+|
+|If you want to provide a seamless user experience aligned with the other modules of Nexeed IAS.
+|
+
+|38
+|UI-Wording alignment with Nexeed IAS
+|
+|If you do not want to confuse users with words used differently.
+|
+
+|39
+|Bosch AIM Compliance
+|
+|If you want to be compatible with authorization guidelines in Bosch.
+|
+
+|40
+|Align sales documents, pricing and reselling agreement
+|
+|If you want the legal framework for mutual reselling set-up.
+|
+
+|41
+|...
+|
+|
+|
+
+|===

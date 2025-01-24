@@ -1,0 +1,37 @@
+[[Postman]]
+= Try out with Postman
+
+You can download our xref:attachment$Nexeed_IAS_PostmanCollection.json[Postman collection] with the API calls to try out how the various module APIs work.
+
+== Postman environment
+
+Import the prepared environment file xref:attachment$Nexeed_IAS_PostmanEnvironment.json[Postman Environment] into Postman in order to create the default environment for the upcoming requests. Add your specific values for the environment variables. To get client ID and client secret, check out the
+"xref:MACMA:03_getting_started:10_appregistration.adoc[]" section of the Multitenant Access Control documentation.
+
+image::env_variables.png[]
+
+== Postman collection
+
+Import the prepared xref:attachment$Nexeed_IAS_PostmanCollection.json[Postman collection] to Postman.
+
+NOTE: Make sure your collection uses the environment "Nexeed IAS Integration" and that it is configured.
+
+*Request access token*
+
+Most of the requests will use the "Client Credential Grant Type Flow".
+
+NOTE: To request an access token from Multitenant Access Control, visit the authorization tab on the parent folder of a request you want to try.
+
+For example: If you want to try any request from Multitenant Access Control, the token can be obtained from the authorization tab on the parent folder named Multitenant Access Control. All the requests in this folder will inherit the access token.
+
+Verify that the variables for Access Token URL, Client ID, Client Secret and Scope are configured in the environment variables.
+
+image::authorization.png[]
+
+Click \<<Get New Access Token>> and then \<<use token>>.
+
+image::authorization_2.png[]
+
+This will let the auth server check the validity of your credentials and will create a bearer token, which will be added as an authorization header for all subsequent requests. Keep in mind that the token has a 5 minutes expiry time and therefore needs a refresh every couple minutes.
+
+

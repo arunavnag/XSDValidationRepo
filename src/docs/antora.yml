@@ -1,0 +1,11 @@
+name: IASIG
+title: Integration Guide
+version: ~
+display_version: 'latest'
+start_page: ROOT:index.adoc
+nav:
+  - modules/introduction/nav.adoc
+  - modules/buildingblocks/nav.adoc
+  - modules/concepts/nav.adoc
+  - modules/gettingStarted/nav.adoc
+  - modules/goals/nav.adoc

@@ -1,0 +1,28 @@
+@startuml
+
+mainframe outbound communication
+
+package "Nexeed Industrial Application System" {
+  [Modules]
+  [Internal message broker]
+  [Orchestrator]
+  [ERP Connectivity]
+  [Data Publisher]
+}
+
+package "Enterprise / Cloud IT" {
+  [ERP]
+  [Message broker]
+  [Any service]
+}
+
+[Data Publisher] --> [Message broker]
+[ERP Connectivity] --> [ERP]
+[Modules] --> [Orchestrator]
+[Orchestrator] <-> [Any service]
+[Message broker] -> [Any service]
+[Modules] --d-> [Internal message broker]
+[Internal message broker] -> [Data Publisher]
+[Internal message broker] -l-> [ERP Connectivity]
+
+@enduml

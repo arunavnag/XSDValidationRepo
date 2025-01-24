@@ -1,0 +1,78 @@
+{
+	"id": "f985e960-8c09-4b38-851a-7aba1e07c0a0",
+	"name": "Nexeed IAS Integration",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "the host url",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tenant_id",
+			"value": "your tenant id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "client_id",
+			"value": "your module client id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "client_secret",
+			"value": "your module client secret",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "redirect_uri",
+			"value": "your module redirect uri",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "device_id_in_mdm",
+			"value": "device id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "device_technical_id",
+			"value": "device technical id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "module_id_in_portal",
+			"value": "Your module id for portal",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "macma_client_id",
+			"value": "macma",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "portal_client_id",
+			"value": "portal",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "mdm_client_id",
+			"value": "mdm client id",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "condition_monitoring_client_id",
+			"value": "condition monitoring client id",
+			"type": "default",
+			"enabled": true
+		}
+	]
+}

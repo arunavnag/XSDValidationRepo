@@ -1,0 +1,154 @@
+trigger: none
+
+pool: LinuxAgents-Cloud-VM
+
+variables:
+  - group: OSS Check Variables  # OSS variables (shared)
+
+jobs:
+  - job: FossIDCheck
+    displayName: Checkout sources, build and check FossID
+    variables:
+    - group: integration-guide-variable-group
+    steps:
+    - checkout: self
+      clean: true
+      persistCredentials: true
+    - bash: |
+        export GIT_CREDENTIALS='https://$(System.AccessToken):@dev.azure.com'
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        rm -rf .cache/antora
+        rm -rf build
+        echo "Running 'npm install' with node $(node --version) and npm $(npm --version)"
+        npm install
+        npm run antora
+      displayName: Build documentation
+    - bash: |
+        cp -f -r src/docs/html/* build/site/
+        cp -f src/docs/staticwebapp.config.json build/site/
+        pwd
+        mv api build/
+        ls -la
+        tree -a build
+      displayName: move files to build and show site folder
+    - task: FossIDTsTask@1
+      inputs:
+        source: '$(Build.SourcesDirectory)/build/'
+        project_id: 'BCI-Nexeed-IAS-Integration-Guide'
+        username: '$(FossIDUser)'
+        apikey: '$(FossIDApiKey)'
+        externalEndpointArtifactoryFeed: 'Artifactory BoschDevCloud-Nx_Foundation'
+        breakOnViolation: 'true'
+        continueOnError: true
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Artifacts
+      condition: always()
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/reports'
+        ArtifactName: 'FossIDScanReport'
+        publishLocation: 'Container'
+  - job: WhitesourceCheck
+    displayName: Checkout sources, build and check Whitesource
+    variables:
+      - group: integration-guide-variable-group
+    steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
+      - bash: |
+          export GIT_CREDENTIALS='https://$(System.AccessToken):@dev.azure.com'
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          rm -rf .cache/antora
+          rm -rf build
+          echo "Running 'npm install' with node $(node --version) and npm $(npm --version)"
+          npm install
+          npm run antora
+        displayName: Build documentation
+      - bash: |
+          cp -f -r src/docs/html/* build/site/
+          cp -f src/docs/staticwebapp.config.json build/site/
+          pwd
+          mv api build/
+          ls -la
+          tree -a build
+        displayName: move files to build and show site folder
+      - task: WhiteSourceTsTask@1
+        inputs:
+          ScanDirectory: '$(Build.SourcesDirectory)/build/'
+          whitesourceProductName: 'BCI-Nexeed-IAS-Integration-Guide'
+          whitesourceUserKey: '$(WhiteSourceUserKey)'
+          whitesourceProjectName: 'BCI-Nexeed-IAS-Integration-Guide'
+          whitesourceDisplayName: 'BCI Nexeed IAS Integration Guide'
+          ConfigPath: 'wss-unified-agent-ai.config'
+          externalEndpointArtifactoryFeed: 'Artifactory BoschDevCloud-Nx_Foundation'
+          projectVersion: '1.0'
+          TargetPath: '$(Build.ArtifactStagingDirectory)/reports/whitesource'
+        condition: always()
+        continueOnError: true
+      - task: PublishBuildArtifacts@1
+        displayName: Publish Artifacts
+        condition: always()
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/reports'
+          ArtifactName: 'WhiteSource'
+          publishLocation: 'Container'
+  - job: SonarCheck
+    displayName: Checkout sources, build and check Sonarcube
+    variables:
+      - group: integration-guide-variable-group
+    steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
+      - bash: |
+          export GIT_CREDENTIALS='https://$(System.AccessToken):@dev.azure.com'
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          rm -rf .cache/antora
+          rm -rf build
+          echo "Running 'npm install' with node $(node --version) and npm $(npm --version)"
+          npm install
+          npm run antora
+        displayName: Build documentation
+      - bash: |
+          cp -f -r src/docs/html/* build/site/
+          cp -f src/docs/staticwebapp.config.json build/site/
+          pwd
+          mv api build/
+          ls -la
+          tree -a build
+        displayName: move files to build and show site folder
+      - task: SonarQubePrepare@4
+        condition: always()
+        inputs:
+          SonarQube: 'SonarQube DevCloud-Nx_Foundation'
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: 'Nx_Foundation_com.bosch.bci:nexeed-ias-integration-guide'
+          cliProjectName: 'Nx_Foundation :: BCI-Nexeed-IAS-Integration-Guide'
+          cliSources: 'build/'
+          extraProperties: |
+            sonar.branch.name=$(Build.SourceBranchName)
+            sonar.sourceEncoding=UTF-8
+            sonar.sources = **/*
+      - task: SonarQubeAnalyze@4
+        condition: always()
+      - task: SonarQubePublish@4
+        condition: always()
+        inputs:
+          pollingTimeoutSec: '300'
+      - task: PublishBuildArtifacts@1
+        condition: always()
+        displayName: Publish Artifacts
+        inputs:
+          PathtoPublish: '$(Build.SourcesDirectory)/.scannerwork/report-task.txt'
+          ArtifactName: 'coverageReport'
+          publishLocation: 'Container'
+      - task: sonar-buildbreaker@8
+        condition: always()
+        inputs:
+          SonarQube: 'SonarQube DevCloud-Nx_Foundation'
+        displayName: SonarQualityGate
+        continueOnError: true

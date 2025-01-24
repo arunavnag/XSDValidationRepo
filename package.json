@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@antora/cli": "3.1.9",
+    "@antora/lunr-extension": "1.0.0-alpha.8",
+    "@antora/site-generator": "3.1.9",
+    "asciidoctor-kroki": "0.18.1",
+    "require": "^2.4.20"
+  },
+  "scripts": {
+    "antora": "./node_modules/@antora/cli/bin/antora site.yml --fetch --stacktrace"
+  },
+  "devDependencies": {
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "type": "module"
+}

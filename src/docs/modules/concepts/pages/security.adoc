@@ -1,0 +1,13 @@
+[[Security]]
+= Security
+
+[[AuthnAuth]]
+== Authorization & Authentication
+
+The details of how we deal with authorization and authorization can be found in the according xref:MACMA:02_concepts:index.adoc[concept page] of Multitenant Access Control.
+
+[[Encryption]]
+== Encryption
+
+The Nexeed Industrial Application System requires Transport Layer Security (TLS) encryption via Secure Socket Layer (SSL) in all communication channels (e.g. HTTPS, AMQPS, MQTTS, ...). Make sure your application is capable of handling server (and in some cases client) side certificates.
+Additionally, we use encryption when storing application secrets in vaults or encrypted configuration files.

@@ -1,0 +1,27 @@
+@startuml
+
+mainframe inbound communication
+
+package "Shopfloor" {
+  [MAE]
+}
+
+package "Nexeed Industrial Application System" {
+  [Information Router]
+  [Modules]
+  [Internal message broker]
+}
+
+package "Enterprise / Cloud IT" {
+  [Message broker]
+}
+
+[Information Router] --> [Internal message broker]
+[Information Router] --> [Modules]
+[MAE] --> [Information Router]
+[MAE] --> [Message broker]
+[Message broker] --> [Information Router]
+[Internal message broker] --> [Modules]
+
+
+@enduml

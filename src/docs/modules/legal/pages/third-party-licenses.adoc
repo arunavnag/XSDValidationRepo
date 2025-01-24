@@ -1,0 +1,33 @@
+= Third Party Licenses
+
+== Third party licenses of documentation page libraries
+
+=== Highlight v9.18.1
+* License: BSD 3-Clause License
+* URL: https://github.com/highlightjs/highlight.js/blob/9.18.1/LICENSE
+
+=== Tabs block
+* Commit: SHA 0ae3c9509f7234a1c979333368fa480aedf8d1d2
+* License: Mozilla Public License Version 2.0
+* URL: https://gitlab.com/antora/antora-asciidoctor-extensions/-/blob/main/LICENSE
+
+=== Tocbot v4.10.0
+* License: MIT License
+* URL: https://github.com/tscanlin/tocbot/blob/master/LICENSE
+
+=== Highlight.js Turtle Language Support
+* Commit: SHA ac7d1882701a1942383e3be0bae19db70fefc514
+* License: BSD 3-Clause License
+* URL: https://github.com/VladimirAlexiev/highlight.js/blob/feature/language-sparql-ttl/LICENSE
+
+=== lunr.js 2.3.9
+* License: MIT License
+* URL: https://github.com/olivernn/lunr.js/blob/master/LICENSE
+
+=== jquery 3.7.0
+* License: MIT License
+* URL: https://jquery.com/license/
+
+=== Redoc 2.2.0
+* License: MIT License
+* URL: https://github.com/Redocly/redoc/blob/main/LICENSE

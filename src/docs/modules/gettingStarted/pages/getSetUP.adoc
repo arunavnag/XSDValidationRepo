@@ -1,0 +1,16 @@
+[[GetSetUP]]
+
+//TODO collect info
+////
+WebCore
+SDK
+Libraries
+PlugIns
+Repositories
+////
+
+= Get set-up
+
+This section is work in progress and will be about development tools, libraries and frameworks that will help you build software with NEXEED.
+
+NOTE: coming soon™

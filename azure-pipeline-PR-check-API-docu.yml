@@ -1,0 +1,52 @@
+name: $(Build.DefinitionName)_$(Date:yyyyMMdd)_$(Rev:r)
+
+trigger: none
+pr: none
+
+stages:
+  - stage: Check
+    jobs:
+      - job: check_rest_apis
+        displayName: Check REST API docu conformity
+        pool: LinuxAgents-Cloud-VM
+        variables:
+          - group: integration-guide-variable-group
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+          - bash: |
+              export GIT_CREDENTIALS='https://$(System.AccessToken):@dev.azure.com'
+              export NVM_DIR="$HOME/.nvm"
+              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+              rm -rf .cache/antora
+              rm -rf build
+              echo "Running 'npm install' with node $(node --version) and npm $(npm --version)"
+              npm install
+              docker run -d -p 8000:8000 --name kroki yuzutech/kroki
+              ./node_modules/@antora/cli/bin/antora site.yml
+            displayName: Build documentation
+            name: build_step
+          - bash: |
+              npm i -g pajv
+              echo "=========================================================== STARTING SCHEMA CHECK ==========================================================="
+              mkdir errors
+              cd ./build/site/
+              find -type f -iwholename "*/api/_attachments/*" -not -iname "*asyn*" \( -iname "*.json" -or -iname "*.yaml" -or -iname "*.yml" \) -print0 | xargs -0 -I{} sh -c "install -D {} ../../errors/{} && pajv --all-errors -s ../../Nexeed-REST-API-schema.json -d {} 2>../../errors/{}_pajv.txt"
+            condition: always()
+            displayName: REST API schema check
+          - bash: |
+              npm i -g @redocly/cli@latest
+              echo "=========================================================== STARTING RULES CHECK ==========================================================="
+              cd ./build/site/
+              find -type f -iwholename "*/api/_attachments/*" -not -iname "*asyn*" \( -iname "*.json" -or -iname "*.yaml" -or -iname "*.yml" \) -print0 | xargs -0 -I{} sh -c "install -D {} ../../errors/{} && redocly lint --config=../../redocly.yaml {} 2>../../errors/{}_lint.txt"
+            condition: always()
+            displayName: REST API Rules check
+          - publish: errors
+            artifact: Errors
+            condition: always()
+          - bash: |
+              docker rm --force kroki
+              sudo chown -R AzDevOps $(Agent.BuildDirectory)
+            condition: always()
+            displayName: Cleanup

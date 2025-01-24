@@ -1,0 +1,1 @@
+* xref:buildingblocks.adoc[Building blocks]

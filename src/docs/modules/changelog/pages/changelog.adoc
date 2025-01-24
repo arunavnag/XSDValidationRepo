@@ -1,0 +1,140 @@
+= Changelog
+
+07.01.2025::
+* Added xref:process_quality:introduction:introduction.adoc[Process Quality]
+
+28.11.2024::
+* Added xref:erp_connectivity:introduction:introduction.adoc[ERP Connectivity]
+
+26.11.2024::
+* Added xref:tool_management:introduction:introduction.adoc[Tool Management]
+* Added xref:shopfloor-management-essentials:introduction:introduction.adoc[Shopfloor Management Essentials]
+* Added xref:PT:introduction:introduction.adoc[Part Traceability]
+
+21.11.2024::
+* Added xref:ArchivingBridge:introduction:introduction.adoc[Archiving Bridge]
+
+20.11.2024::
+* Added xref:SPECS:introduction:introduction.adoc[Setup Specs]
+* Added xref:PSM:introduction:introduction.adoc[Product Setup Management]
+
+19.11.2024::
+* Added xref:MM:introduction:introduction.adoc[Maintenance Management]
+
+18.11.2024::
+* Added xref:IL:introduction:introduction.adoc[Transport- and Stockmanagement]
+
+14.11.2024::
+* Added xref:LC:introduction:introduction.adoc[Line Control]
+
+12.11.2024::
+* Updated xref:legal:third-party-licenses.adoc[Redoc] to version 2.2.0 and updated some CSS styling
+
+08.11.2024::
+* Added xref:MAT:introduction:introduction.adoc[Material Management]
+
+07.11.2024::
+* Added xref:NOISE:introduction:introduction.adoc[Notification Service]
+* Added xref:SMDP:introduction:introduction.adoc[Deviation Processor]
+* Added xref:IDB:introduction:introduction.adoc[ID Builder]
+
+06.11.2024::
+* Added xref:TM:01_introduction:00_introduction.adoc[Ticket Management]
+
+05.11.2024::
+* Added xref:CM:01_introduction:00_introduction.adoc[Condition Monitoring]
+
+22.10.2024::
+* Added xref:OM:introduction:introduction.adoc[Order Management]
+
+12.09.2024::
+* Added NEXEED icon
+* Added support for AsyncAPI documentation type
+* Fixed or improved various JS/CSS issues
+
+14.08.2024::
+* Added xref:GPO:01_introduction:introduction.adoc[Global Production Overview]
+
+27.06.2024::
+* Added xref:DataPublisher:introduction:introduction.adoc[Data Publisher]
+
+09.06.2024::
+* Updated the xref:gettingStarted:postman.adoc[postman collection] to reflect changes in xref:MACMA:api:api.adoc[Multitenant Access Control] behaviour and new xref:Portal:api:api.adoc[Portal Registration API]
+
+02.05.2024::
+* Added xref:Orchestrator:introduction:index.adoc[Orchestrator]
+
+15.04.2024::
+* Updated xref:buildingblocks:buildingblocks.adoc[]
+
+10.04.2024::
+* Fixes to the UI
+
+12.03.2024::
+* Added Information Router xref:IR:90_api:api.adoc[API documentation]
+* Overhauled xref:goals:roadmap.adoc[] to reflect topics better
+* Added xref:concepts:onboarding.adoc[Onboarding concept page]
+* Extended the content of some xref:concepts:index.adoc[] pages
+
+08.01.2024::
+* Initial documentation release of xref:master_data_management:introduction:introduction.adoc[Master Data Management]
+* Added Master Data Management xref:master_data_management:api:equipment.adoc[API documentation]
+
+02.01.2024::
+* Happy New Year!
+* Changed the structure of the integration guide, now it should be easier to access
+* Added the section User Manuals to the overview
+* Fixed some bugs e.g. with mobile usage
+
+10.11.2023::
+* Overhaul of xref:MACMA:01_introduction:introduction.adoc[Multitenant Access Control] documentation
+* Multitenant Access Control xref:MACMA:api:api.adoc[API documentation] added
+* UX improvements/fixes e.g.reintroduced page navigation
+* Made feedback page externally available
+
+10.11.2023::
+* Overhaul of xref:MACMA:01_introduction:introduction.adoc[Multitenant Access Control] documentation
+* Multitenant Access Control xref:MACMA:api:api.adoc[API documentation] added
+* UX improvements/fixes e.g.reintroduced page navigation
+* Made feedback page externally available
+* Multitenant Access Control xref:MACMA:api:api.adoc[API documentation] added
+* UX improvements/fixes e.g.reintroduced page navigation
+* Made feedback page externally available
+
+28.08.2023::
+* Initial documentation release of xref:Portal:ROOT:index.adoc[Web Portal]
+* Initial documentation release of xref:IR:01_introduction:00_introduction.adoc[Information Router]
+* Web Portal xref:Portal:api:api.adoc[API documentation] added
+* xref:IASIG:gettingStarted:gettingStarted.adoc[Postman collection] updated: changed Portal registration endpoint back to officially supported version v1
+* Multitenant Access Control xref:MACMA:api:api.adoc[API documentation] added
+* UX improvements/fixes e.g.reintroduced page navigation
+* Made feedback page externally available
+
+16.08.2023::
+* New overview page
+* Feedback form added
+* xref:gettingStarted:gettingStarted.adoc[Postman collections] added
+* Various UI fixes
+
+03.07.2023::
+* Initial release Integration Guide + Multitenant Access Control
+
+'''
+
+Up next::
+
+* Data Publisher documentation
+* Shopfloor Management documentation
+* Internal routing documentation
+* Example application: Green-field: Hello World
+* Example application: Open-source: Node-Red
+
+'''
+
+Beyond::
+* Chat Bot integration
+* Special Content Protection by Single Key ID login
+* Operator Manuals
+* Information Router How-Tos
+* Example Application: Closed-source: tbd
+* Example Use-Cases for business data integration

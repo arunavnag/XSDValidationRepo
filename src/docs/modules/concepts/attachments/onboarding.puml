@@ -1,0 +1,62 @@
+@startuml
+
+mainframe onboarding
+
+|Developer|
+start
+:Provide artifacts\nand Operations\nmanual;
+
+|#AntiqueWhite|Operator|
+:Register module;
+
+|#f0faca|Application|
+
+|Multitenant Access Control|
+:Generate client\ncredentials;
+
+|Operator|
+:Configure module;
+
+|Operator|
+if (Are application roles required?) is (yes) then
+:Authorize application\nwith required\napplication roles;
+
+  |Multitenant Access Control|
+  :Assign application roles;
+
+end if
+|Operator|
+:Run module;
+
+|Application|
+:Start-Up;
+:Request to register resources;
+
+|Multitenant Access Control|
+:Register resources;
+
+|Application|
+:Request to register roles;
+
+|Multitenant Access Control|
+:Register roles;
+
+
+|Operator|
+if (Application has a\nUI to integrate or \nartifacts to provide?) is (yes) then
+  :Trigger Web Portal registration;
+
+    |Web Portal|
+    :Verify information and\nregister module;
+
+endif
+|Operator|
+:Authorize developer\naccount with application roles;
+
+|Multitenant Access Control|
+:Assign user roles;
+
+|Developer|
+:Test if application\nworks in NEXEED;
+stop
+@enduml

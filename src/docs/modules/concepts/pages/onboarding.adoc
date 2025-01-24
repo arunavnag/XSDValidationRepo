@@ -1,0 +1,44 @@
+= Application onboarding
+
+Applications that want to interact with the Nexeed Industrial Application System have to be registered in order to enable secure communication. In the hereafter described onboarding process, we need two actors:
+
+* Operator
+* Application (enabled by developers)
+
+This separation is needed to control and restrict the registration to only applications, that are meant to be in the system. The operator acts as gatekeeper in his task of maintaining the integrity of the whole NEXEED software system.
+
+In the beginning of most software lifecycles, developers will have the need to quickly register and un-register their own application for testing and validation purposes. This is then of course leaning into the DevOps paradigm. In such cases, operator and developer duty must be performed by one person or group of people.
+Later, on production environments, we strongly advice to keep both duties strictly separated.
+
+When operators face large systems (e.g. an installation of Nexeed Industrial Application System can come with 30+ modules), it is quite recommended to automate the steps needed for registering modules in the system. A possible way to do so is to use automation tooling like https://www.ansible.com/[Ansible], https://www.puppet.com/[puppet] or similar. Then, the manual step of registering an application in Multitenant Access Control is only needed once up-front for this tool, and, given the right permissions are assigned, all other onboarding steps are done by it subsequently for each module.
+In certain circumstances, even the manual step can be automated, as xref:MACMA:04_how_to:70_testing_including_authorization.adoc[this chapter] explains.
+
+To onboard your application into Nexeed Industrial Application System, the following steps are needed:
+
+(assuming your application comes with a UI and/or provides common artifacts like a documentation of some sort)
+
+1. xref:MACMA:03_getting_started:10_appregistration.adoc[Register module in Multitenant Access Control]
+2. xref:MACMA:02_concepts:roles.adoc[Assign application roles]
+3. Run the application with the newly created credentials and permissions
+4. xref:MACMA:02_concepts:resources.adoc[Register resources] and xref:MACMA:02_concepts:roles.adoc[roles]
+5. xref:Portal:04_how_tos:10_register_views.adoc[Register views in Web Portal]
+
+[plantuml, target=images/onboarding, format=svg]
+----
+include::attachment$onboarding.puml[]
+----
+
+IMPORTANT: Your application should be robust and e.g. able to handle unavailability of involved services. Get in contact with us if you like to learn how we enabled our modules to achieve this.
+
+*Further topics*
+
+Besides Multitenant Access Control and Web Portal, other key modules of the Nexeed Industrial Application System also provide means to register your application for their purposes:
+
+- *Message Broker*
+- *Information Router*
+- *Orchestrator*
+- *Data Publisher*
+- *Deviation Processor*
+- *...*
+
+Check out xref:buildingblocks:buildingblocks.adoc#Extensions[this] page for an overview of all our Valuable Extensions and their respective documentation.

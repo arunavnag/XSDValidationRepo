@@ -1,0 +1,195 @@
+= Guide
+
+Step-by-step we want to provide you with instructions on how to integrate your application into the Nexeed Industrial Application System.
+
+[[registerApp]]
+== 1. Become a registered application
+
+[[register-your-application-in-multitenant-access-control]]
+=== 1.1: Register your application in Multitenant Access Control
+Review this xref:MACMA:03_getting_started:10_appregistration.adoc[Section in the Multitenant Access Control documentation] on what to know about how to register your application in Multitenant Access Control
+
+Registration can be done in two ways: via the UI or the API.
+
+[width=100%]
+[cols="1a,1a"]
+|===
+|UI |API
+
+|As an administrator user, go to the functionality "Modules" of the Multitenant Access Control Module. From there, use the wizard for adding a new Module or follow the instructions of the user manual "Adding a Module"
+
+|
+//TODO: Make public & API doc link
+
+WARNING: This is not a public API yet
+
+----
+/iam/application-management/v1/tenants/{tenantId}/applications
+----
+
+Request:
+[,json]
+----
+{
+    "name":"TestModule",
+    "displayName":"TestModule",
+    "clientSecret":"TestModule",
+    "redirectUris":["https://nexeed-showcase.germanywestcentral.cloudapp.azure.com/user-management/"],
+    "webOrigins":["https://nexeed-showcase.germanywestcentral.cloudapp.azure.com/"],
+    "enableUserLoginWithConfidentialClient":true,
+    "includesPublicClient":true
+}
+----
+|===
+
+_How to test this step:_
+
+If the registration was successful, you can now use the
+ via the openID-connect token endpoint. See next step.
+
+[[implement-client-credentials-flow]]
+=== 1.2: Implement Client Credentials Flow
+
+In order to interact with Nexeed IAS APIs, a token must be obtained first. This is done via the Client Credentials Flow of oAuth2 using our Multitenant Access Control module. Read more on this and how it's done
+
+----
+/iam/access-management/v1/tenants/{tenantId}/openid-connect/token
+----
+
+IMPORTANT: The scope parameter must be specified for this request to work. See  for more info. To specify the scope for a token, use the "scope" form field and "aud:" followed by the client ID of the target module. In the Multitenant Access Control UI under the view "modules", you can extract the client ID of the desired target scope.
+
+//TODO: Postman
+
+##TODO## Add testing step here
+
+[[register-roles-resources-for-authorization]]
+=== 1.3: Manage the roles and permissions your application needs
+If your application wants to interact with the Nexeed IAS, it needs appropriate permissions to do so.
+
+Again, this can be done both via the UI or API
+
+[width=100%]
+[cols="1a,1a"]
+|===
+|UI |API
+
+|In the modules view, select your module and click on the "Roles" tab. You can then add roles from other applications. Please refer to the user manual section "Assigning a Role to a Module" for a detailed description.
+
+//TODO deeplink API doku
+|please refer to the https://portal.bosch-nexeed.com/docs/api[Public API documentation] in the section Multitenant Access Control > Application Management Bulk > Create or update application roles
+
+##TODO## change to assign app role once public
+
+|===
+
+_How to test this step:_
+
+If role assignment was successful, your application can access protected information from other modules. So you need to try to access the protected resource, e.g. the User Info endpoint. Let's assume you added the "User reader" role from Multitenant Access Control to your application. By trying to access the appropriate API with the specific client token, you should get back a HTTP 200 with the right information.
+----
+/iam/user-management/v1/tenants/{tenantId}/users
+----
+Use your tenantId for testing.
+
+successful return:
+[,json]
+----
+[{
+    "id": "634cea45-c812-461d-bd8c-6bda08ce7ee9",
+    "username": "administrator",
+    "firstName": "Max",
+    "lastName": "Smith",
+    "email": "example@address.com",
+    "hasLocalIdentity": true,
+    "hasFederationLink": false,
+    "employeeId": "user123",
+    "phoneNumber": "(11) 123 456"
+}]
+----
+
+//TODO: Postman
+
+[[register-your-views-in-the-web-portal]]
+=== 1.4: Register roles & resources for authorization
+If you want to restrict access to your application, e.g. if not everyone should have it in their main menu, it needs to provide role and resource definitions users can be associated to.
+
+This can only be done via the API.
+
+Please visit  of the Multitenant Access Control documentation on how to register roles and resources
+
+_How to test this step:_
+
+If your roles were registered successfully, you can check their availability via the UI or API:
+
+[width=100%]
+[cols="1a,1a"]
+|===
+|UI |API
+
+|please refer to the https://portal.bosch-nexeed.com/doc/en/index.htm#154414.htm[User Manual of Multitenant Access Control]
+
+|
+WARNING: This is not a public API yet
+
+----
+/iam/role-management/v1/tenants/{tenantId}/roles/available
+----
+|===
+
+If your resources were registered successfully, you can check them via the UI and API as well
+[width=100%]
+[cols="1a,1a"]
+|===
+|UI |API
+
+|listing the resources a module registered is a bit hidden behind the assignment of permissions to roles in Multitenant Access Control
+
+please refer to the https://portal.bosch-nexeed.com/doc/en/index.htm#154415.htm[User Manual of Multitenant Access Control]
+
+|
+WARNING: This is not a public API yet
+
+----
+/iam/application-management-bulk/v1/tenants/{tenantId}/applications/{clientId }/resources/search
+----
+|===
+
+=== 1.5: Register a view in the Web Portal
+
+NOTE: coming soon™
+
+
+////
+
+
+#2 Autorisation:
+#2a register resources (if
+UI
+
+API
+
+#2b check against
+Implement introspect / get user info from MACMA
+
+
+#3
+Applikationsrollen hinzufügen (wenn Zugriff benötigt) z.b. Portal Registration oder User Reader
+Über UI
+Über API
+Eigene in MACMA anlegen
+Bestehende verwenden
+
+
+#4
+Portal registrieren
+
+#4.1 Dafür muss deine App Mindestens den info endpoint implementieren
+/info	Registration. Provides version information, for example.	Mandatory for registration and updates.
+
+Per UI
+Therefore, open the Configuration page from the user menu and enter the Application Registration tab.
+
+Per API:
+#4.2 MACMA-> Client ID flow
+#4.3 Portal > Register
+////
+

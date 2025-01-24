@@ -1,0 +1,18 @@
+[[Environment]]
+//TODO set-up of self-service
+= Get access to a development environment
+
+This section will describe how to apply for a developer account.
+
+As self-service account creation is currently being prepared, please use our https://www.bosch-connected-industry.com/de/en/contact[contact form] for the time being.
+
+
+////
+Public - our
+Internal - our
+
+BMLP
+
+dedicated install - we do
+dedicated install - you do
+////

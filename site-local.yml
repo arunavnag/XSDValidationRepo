@@ -1,0 +1,185 @@
+site:
+  title: Nexeed Developer Documentation DEV
+  url: http://localhost:8080
+  start_page: IASIG::index.adoc
+content:
+  sources:
+    - url: .
+      branches: HEAD
+      start_path: src/docs
+    # START MACMA components
+    #- url: ../macma-module/
+    #  start_paths: [src/docs/00_common, src/docs/50_developer-guide, src/docs/99_glossary]
+    #  branches: HEAD
+    #  version: ~
+    #- url: ../macma-core/
+    #  start_path: src/main/antora
+    #  branches: HEAD
+    #  version: ~
+    # END MACMA components
+    # START Portal components
+    #- url: ../nexeed-portal-docs
+    #  start_paths: [src/docs/50_developer-guide, src/docs/99_glossary]
+    #  branches: HEAD
+    #  version: ~
+    # END Portal components
+    # START MDM components
+    #- url: ../mdm-opsmanual
+    #  start_paths: [src/docs/50_developer-documentation, src/docs/99_glossary]
+    #  branches: [ 'Release/v8.{4..9}.{0..9}' ]
+    #  version:
+    #    Release/v(*): $1
+    # END MDM components
+    # START IR components
+    #- url: ../ir-module
+    #  start_paths: [src/docs/50_developer-guide, src/docs/99_glossary]
+    #  branches: HEAD
+    #  version: ~
+    # END IR components
+    # START Orchestrator components
+    #- url: ../orchestrator-service
+    #  start_paths: [ docs/src/50_developer-guide, docs/src/99_glossary ]
+    #  #  tags: [ release/*/1.1.2 ]
+    #  version: "1.1.2"
+    #  #  release/*/(*): $1
+    #  branches: HEAD
+    # END Orchestrator
+    # START Data Publisher
+    #- url: ../datapublisher
+    #  start_paths: [ src/docs/50_developer-guide , src/docs/99_glossary ]
+    #  version: ~
+    #  branches: HEAD
+    # END Data Publisher
+    # START TM components
+    #- url: ../tm-module/
+    #  start_paths: [src/docs/00_common, src/docs/50_developer-guides]
+    #  branches: HEAD
+    #  version: ~
+    #- url: ../ticket-management/
+    #  start_path: ticket-service-backend/src/main/antora
+    #  branches: HEAD
+    #  version: ~
+    # END TM components
+    # START Archiving Bridge
+    #- url: ../archivingbridge
+    #  start_paths: [ docs/50_developer-guides ]
+    #  version: ~
+    #  branches: HEAD
+    # END Archiving Bridge
+    # START SMC components
+    #- url: ../scs-shopfloor-management-essentials
+    #  start_paths: [ docs/50_developer-guide ]
+    #  branches: [ dev-doku ]
+    #  version: 'latest'
+    #- url: ../pdamda-global-production-overview
+    #  start_paths: [ docs/50_developer-documentation ]
+    #  tags: [ documentation-to-publish/* ]
+    #  version: ~
+    #  branches: HEAD
+    # END SMC components
+    # START OM components
+    #- url: ../ordermanagement-services
+    #  start_paths: [src/docs/50_developer-documentation]
+    #  branches: HEAD
+    #  version: ~
+    # END OM components
+    # START LC components
+    #- url: ../ias-linecontrol-ui-service
+    # start_paths: [src/docs/50_developer-documentation]
+    #  tags: [ documentation-to-publish/* ]
+    #  version:
+    #    documentation-to-publish/(*): $1
+    #  branches: ~
+    # END LC components
+    # START CM components
+    #- url: ../condition-monitoring
+    #  start_paths: [ src/docs/50_developer-guides ]
+    #  branches: HEAD
+    #  version: ~
+    # END CM components
+    # START IL components
+    #- url: ..\ies-services
+    #  start_paths: [src/docs/50_developer-documentation]
+    #  branches: HEAD
+    #  version: ~
+    # END IL components
+    # START MAT components
+    #- url: ../matcontrol-docs
+    #  start_paths: [src/docs/50_developer-documentation,src/docs/99_glossary]
+    #  branches: HEAD
+    #  version: ~
+    # END MAT components
+    # START MM components
+    #- url: ../ias-module-repo-mm
+    #  start_paths: [src/docs/50_developer-documentation,src/docs/99_glossary]
+    #  branches: HEAD
+    #  version: ~
+    # END MM components
+    # START TOMA components
+    #- url: toolmanagement
+    #  start_paths: [ src/docs/50_developer-documentation,src/docs/99_glossary ]
+    #  branches: HEAD
+    #  version: ~
+    # END TOMA components
+    # START PSM components
+    #- url: ../productsetupmanagement-docs
+    #  start_paths: [src/docs/50_developer-documentation]
+    #  branches: HEAD
+    #  version: ~
+    # END PSM components
+    # START SPECS components
+    #- url: ../setupcontrol-services
+    #  start_paths: [src/docs/50_developer-documentation]
+    #  branches: HEAD
+    #  version: ~
+    # END SPECS components
+    # START PT components
+    #- url: ../part-traceability
+    #  start_paths: [ src/docs/50_developer-documentation ]
+    #  branches: HEAD
+    #  version: ~
+    # END PT components
+    # START ERP Connectivity
+    #- url: https://dev.azure.com/bosch-bci/Nx_Foundation/_git/ias-erpconnectivity
+    #  start_paths: [ src/docs/50_developer-guides , src/docs/99_glossary ]
+    #  tags: [ release/* ]
+    #  version:
+    #    release/V(*).x: $1
+    #  branches: ~
+    # END ERP Connectivity
+    # START PQM components
+    #- url: ../process-quality
+    #  start_paths: [ docs/module-documentation/src/docs/50_developer-documentation ]
+    #  branches: HEAD
+    #  version: ~
+    # END PQM components
+git:
+  ensure_git_suffix: false
+ui:
+  bundle:
+    url: ./docs-ui/ui-bundle.zip
+    snapshot: true
+runtime:
+  cache_dir: ./.cache/antora
+output:
+  clean: false
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
+asciidoc:
+  attributes:
+    doctype: book
+    # page-component-sort-order: IASIG,MACMA,Portal,MDM,IR
+    page-component-sort-order: 
+    - area: IASIG
+    - area: Test
+      components: process_quality
+  extensions:
+    - asciidoctor-kroki
+# The latest_version_segment key replaces the actual version with the symbolic version in the published URLs of the latest component versions.
+# As the key’s name implies, it only applies to the latest version of each component version in a site.
+# If you want to drop the version segment from the URL, you can do so by setting the value to empty string
+# Useful for stable bookmarks
+urls:
+  latest_version_segment: ''
